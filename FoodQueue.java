@@ -76,8 +76,8 @@ public class FoodQueue {
         }
 
         queue.remove();
-        recurseSearch(search, queue);
-        return false;
+        return recurseSearch(search, queue);
+        
 
     }
 
