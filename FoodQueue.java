@@ -6,7 +6,7 @@ import java.util.Iterator;
 public class FoodQueue {
 
     Queue<String> q = new LinkedList<String>();
-    PriorityQueue<String> pq = new PriorityQueue<>();
+    Queue<String> pq = new PriorityQueue<>();
 
     public void addRegular(String food) {
         try {
@@ -38,6 +38,8 @@ public class FoodQueue {
         }
     }
 
+
+
     public void display() {
         System.out.println("Priority:");
         System.out.println(pq);
@@ -47,29 +49,35 @@ public class FoodQueue {
         System.out.println(q);
     }
 
-    public boolean search(String search){
-
-        if (pq.isEmpty() && q.isEmpty()) {
-            return false;
+    public void cancel(String search) {
+        if (!pq.isEmpty() && recurseSearch(search, pq)){
+            pq.remove(search);
+            System.out.println(search + " removed.");
         }
 
-        else if (!pq.isEmpty()){
-            for(String s: pq){
-                if(s.equals(search)){
-                    return true;
-                }
-            }
-            return false;
+        else if (!q.isEmpty() && recurseSearch(search, q)){
+            q.remove(search);
+            System.out.println(search + " removed.");
         }
 
         else {
-            for(String s: q){
-                if(s.equals(search)){
-                    return true;
-                }
-            }
+            System.out.println("Not there budster.");
+        }
+    }
+
+    public boolean recurseSearch(String search, Queue<String> queue) {
+
+        if (queue.isEmpty()) {
             return false;
         }
+
+        else if (search.equals(queue.peek())) {
+            return true;
+        }
+
+        queue.remove();
+        recurseSearch(search, queue);
+        return false;
 
     }
 
