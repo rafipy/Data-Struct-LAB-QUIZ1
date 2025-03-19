@@ -14,8 +14,12 @@ public class Main {
 
         fq.display();
 
-        System.out.println(fq.search("Baclava"));
-        System.out.println(fq.search("Dorya"));
+        fq.cancel("Baclava");
+        fq.cancel("Foot Dive");
+
+        fq.display();
+
+
 
 
 
